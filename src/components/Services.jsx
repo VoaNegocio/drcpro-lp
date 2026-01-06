@@ -104,23 +104,23 @@ const ServiceCard = ({ service, index }) => {
 
     return (
         <div className="min-w-[85vw] md:min-w-0 snap-center flex p-1 perspective-1000">
-            <div className={`relative w-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
+            <div className={`relative w-full transition-transform duration-[1500ms] transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
 
                 {/* Front Face */}
-                <Card className="flex flex-col h-full hover:border-brand-blue/30 group p-6 md:p-8 w-full shadow-lg backface-hidden bg-white relative z-10 border-t-4 border-t-brand-blue overflow-hidden">
+                <Card className="flex flex-col h-full hover:border-brand-blue/30 group p-6 md:p-8 w-full shadow-lg backface-hidden bg-white relative z-10 border-t-4 border-t-brand-blue transform-style-3d">
                     {/* Watermark Number */}
-                    <div className="absolute -right-4 -bottom-8 text-[120px] font-bold text-gray-100/50 leading-none select-none pointer-events-none font-heading z-0">
+                    <div className="absolute -right-4 -bottom-8 text-[120px] font-bold text-gray-100/50 leading-none select-none pointer-events-none font-heading z-0 translate-z-0">
                         0{index + 1}
                     </div>
 
-                    <div className="mb-6 p-4 rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300 relative z-10">
+                    <div className="mb-6 p-4 rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300 relative z-10 translate-z-30 drop-shadow-md">
                         <service.icon size={32} className="text-brand-blue group-hover:text-white transition-colors" />
                     </div>
-                    <h3 className="text-xl font-bold text-brand-dark mb-3 relative z-10">{service.title}</h3>
-                    <p className="text-gray-600 mb-8 flex-grow leading-relaxed relative z-10">
+                    <h3 className="text-xl font-bold text-brand-dark mb-3 relative z-10 translate-z-30 drop-shadow-sm">{service.title}</h3>
+                    <p className="text-gray-600 mb-8 flex-grow leading-relaxed relative z-10 translate-z-30">
                         {service.description}
                     </p>
-                    <div className="relative z-10">
+                    <div className="relative z-10 translate-z-50 drop-shadow-xl">
                         <button
                             onClick={handleFlip}
                             className="w-full inline-flex items-center justify-center bg-brand-red text-white font-bold uppercase tracking-wider text-sm py-4 rounded-lg hover:bg-red-700 transition-all duration-300 cursor-pointer animate-pulse-scale shadow-lg shadow-brand-red/30"

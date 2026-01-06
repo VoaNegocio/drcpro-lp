@@ -6082,3 +6082,104 @@ const ServiceCard = ({ service, index }) => {
     );
 };
 ```
+
+### Video Flip Card v2 (Premium 3D + Slow Motion)
+
+**Data:** 06/01/2026 (Atualizado)
+**Descrição:** Evolução do card flip anterior, adicionando efeito 3D real (elementos flutuantes), rotação "slow motion" cinematográfica e correção de fullscreen.
+**Melhorias v2:**
+- **3D Floating Elements:** Uso de `translate-z` e `drop-shadow` para descolar textos e ícones do fundo.
+- **Cinematic Slow Motion:** Aumentado tempo de rotação para `1500ms` para enfatizar o efeito 3D.
+- **Design "Blueprint Tech":** Marca d'água gigante e borda técnica.
+- **CTA Sólido:** Botão "Ver em ação" com animação de pulso e largura total.
+- **Fullscreen Video Fix:** CSS para garantir que vídeos verticais não cortem em tela cheia desktop.
+
+**Código CSS (Tailwind Utilities - Adições):**
+```css
+@layer utilities {
+  /* 3D Depth Levels */
+  .translate-z-0 { transform: translateZ(0px); }
+  .translate-z-30 { transform: translateZ(30px); }
+  .translate-z-50 { transform: translateZ(50px); }
+
+  /* Fullscreen Video Fix */
+  video:fullscreen { object-fit: contain; }
+  video:-webkit-full-screen { object-fit: contain; }
+}
+```
+
+**Código React (Componente v2):**
+```jsx
+const ServiceCard = ({ service, index }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+    const videoRef = useRef(null);
+
+    // Force Autoplay on Flip
+    useEffect(() => {
+        if (isFlipped && videoRef.current) {
+            setTimeout(() => videoRef.current.play().catch(console.log), 300);
+        }
+    }, [isFlipped]);
+
+    const handleFlip = () => setIsFlipped(true);
+
+    const handleUnflip = (e) => {
+        e.stopPropagation();
+        setIsFlipped(false);
+        if (videoRef.current) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+        }
+    };
+
+    return (
+        <div className="min-w-[85vw] md:min-w-0 snap-center flex p-1 perspective-1000">
+            {/* Wrapper com Slow Motion (1500ms) */}
+            <div className={`relative w-full transition-transform duration-[1500ms] transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
+                
+                {/* Front Face: Importante NÃO ter overflow-hidden geral, pois corta o 3D */}
+                <Card className="flex flex-col h-full hover:border-brand-blue/30 group p-6 md:p-8 w-full shadow-lg backface-hidden bg-white relative z-10 border-t-4 border-t-brand-blue transform-style-3d">
+                     {/* Watermark (Depth 0) */}
+                     <div className="absolute -right-4 -bottom-8 text-[120px] font-bold text-gray-100/50 leading-none select-none pointer-events-none font-heading z-0 translate-z-0">
+                        0{index + 1}
+                     </div>
+
+                    {/* Content (Depth 30) */}
+                    <div className="mb-6 p-4 rounded-full bg-blue-50 w-16 h-16 flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300 relative z-10 translate-z-30 drop-shadow-md">
+                        <service.icon size={32} className="text-brand-blue group-hover:text-white transition-colors" />
+                    </div>
+                    <h3 className="text-xl font-bold text-brand-dark mb-3 relative z-10 translate-z-30 drop-shadow-sm">{service.title}</h3>
+                    <p className="text-gray-600 mb-8 flex-grow leading-relaxed relative z-10 translate-z-30">
+                        {service.description}
+                    </p>
+
+                    {/* CTA Button (Depth 50 - Highest) */}
+                    <div className="relative z-10 translate-z-50 drop-shadow-xl">
+                        <button
+                            onClick={handleFlip}
+                            className="w-full inline-flex items-center justify-center bg-brand-red text-white font-bold uppercase tracking-wider text-sm py-4 rounded-lg hover:bg-red-700 transition-all duration-300 cursor-pointer animate-pulse-scale shadow-lg shadow-brand-red/30"
+                        >
+                            Ver em ação <Play size={14} className="ml-2 fill-current" />
+                        </button>
+                    </div>
+                </Card>
+
+                {/* Back Face (Video) */}
+                <div className="absolute inset-0 h-full w-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-xl bg-black border border-brand-blue/20">
+                     <video 
+                        ref={videoRef}
+                        className="w-full h-full object-cover"
+                        controls={true}
+                        playsInline
+                        loop
+                        muted={false}
+                    >
+                        <source src={`/videos/video${index + 1}.mp4`} type="video/mp4" />
+                    </video> 
+                    <button onClick={handleUnflip} className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand-red transition-colors">✕</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+```
