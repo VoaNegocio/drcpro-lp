@@ -6195,6 +6195,7 @@ const ServiceCard = ({ service, index }) => {
 - **Play/Pause Toggle:** Clique em qualquer lugar do vídeo para pausar/tocar.
 - **Ícone Central:** Play grande aparece apenas quando pausado.
 - **Barra Inferior Flutuante:** Glassmorphism com Mute e Fullscreen, aparece no hover/tap.
+- **Ghost Watermark Fix:** O número de fundo ("01", "02") agora recebe `opacity-0` ao virar, evitando que apareça invertido no vídeo.
 - **Close Button:** Mantido no topo direito.
 
 **Código React Relevante (ServiceCard v3):**

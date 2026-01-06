@@ -142,7 +142,7 @@ const ServiceCard = ({ service, index }) => {
                 {/* Front Face */}
                 <Card className="flex flex-col h-full hover:border-brand-blue/30 group p-6 md:p-8 w-full shadow-lg backface-hidden bg-white relative z-10 border-t-4 border-t-brand-blue transform-style-3d">
                     {/* Watermark Number */}
-                    <div className="absolute -right-4 -bottom-8 text-[120px] font-bold text-gray-100/50 leading-none select-none pointer-events-none font-heading z-0 translate-z-0">
+                    <div className={`absolute -right-4 -bottom-8 text-[120px] font-bold text-gray-100/50 leading-none select-none pointer-events-none font-heading z-0 translate-z-0 transition-opacity duration-300 ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
                         0{index + 1}
                     </div>
 
