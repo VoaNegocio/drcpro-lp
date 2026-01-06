@@ -6183,3 +6183,93 @@ const ServiceCard = ({ service, index }) => {
     );
 };
 ```
+
+### Video Flip Card v3 (Custom Controls UI)
+
+**Data:** 06/01/2026 (Atualizado)
+**Problema Solucionado:** A sombra escura (overlay) nativa que navegadores mobile (Chrome/Safari) forçam sobre o vídeo ao usar `controls={true}`, poluindo o visual.
+**Solução:** Remover controles nativos e implementar UI própria com React + Lucide Icons.
+
+**Funcionalidades Customizadas:**
+- **Zero Sombra:** Vídeo 100% limpo, sem interferência do navegador.
+- **Play/Pause Toggle:** Clique em qualquer lugar do vídeo para pausar/tocar.
+- **Ícone Central:** Play grande aparece apenas quando pausado.
+- **Barra Inferior Flutuante:** Glassmorphism com Mute e Fullscreen, aparece no hover/tap.
+- **Close Button:** Mantido no topo direito.
+
+**Código React Relevante (ServiceCard v3):**
+```jsx
+// Importações extras necessárias
+import { Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
+
+const ServiceCard = ({ service, index }) => {
+    // Novos estados
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
+
+    // Toggle Functions
+    const togglePlay = (e) => {
+        e.stopPropagation();
+        if (videoRef.current) {
+            if (videoRef.current.paused) {
+                videoRef.current.play();
+                setIsPlaying(true);
+            } else {
+                videoRef.current.pause();
+                setIsPlaying(false);
+            }
+        }
+    };
+
+    const toggleMute = (e) => {
+        e.stopPropagation();
+        if (videoRef.current) {
+            videoRef.current.muted = !videoRef.current.muted;
+            setIsMuted(videoRef.current.muted);
+        }
+    };
+
+    return (
+        // ...wrapper code
+        
+        {/* Back Face (Video) */}
+        <div className="absolute inset-0 h-full w-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-xl bg-black border border-brand-blue/20 group">
+            <div className="relative w-full h-full cursor-pointer" onClick={togglePlay}>
+                {/* 1. Controls removidos daqui */}
+                <video
+                    ref={videoRef}
+                    className="w-full h-full object-cover"
+                    playsInline
+                    loop
+                    muted={false}
+                    controls={false} // Crucial para não ter sombra
+                >
+                    <source src={`/videos/video${index + 1}.mp4`} type="video/mp4" />
+                </video>
+
+                {/* 2. Custom Play Indicator (Central) */}
+                {!isPlaying && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
+                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center pl-1">
+                            <Play size={32} className="text-white fill-current" />
+                        </div>
+                    </div>
+                )}
+
+                {/* 3. Close Button (Topo) */}
+                <button onClick={handleUnflip} className="...">✕</button>
+
+                 {/* 4. Barra de Controles (Bottom Glass) */}
+                 <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-center bg-black/40 backdrop-blur-md rounded-full px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button onClick={toggleFullscreen} className="text-white hover:text-brand-red">
+                        <Maximize size={20} />
+                    </button>
+                    <button onClick={toggleMute} className="text-white hover:text-brand-red">
+                        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+```

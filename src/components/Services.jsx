@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
-import { Zap, Layers, ClipboardCheck, ArrowRight, Play } from 'lucide-react';
+import { Zap, Layers, ClipboardCheck, ArrowRight, Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
 
 export const Services = () => {
     const [activeSlide, setActiveSlide] = useState(0);
@@ -52,9 +52,6 @@ export const Services = () => {
                     className="flex md:grid md:grid-cols-3 gap-6 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide"
                 >
                     {services.map((service, index) => {
-                        // Local state needs to be extracted to a sub-component or array in parent. 
-                        // For simplicity in this file, let's use a sub-component locally or manage state array.
-                        // Using a sub-component is cleaner for specific item state.
                         return <ServiceCard key={index} service={service} index={index} />;
                     })}
                 </div>
@@ -76,29 +73,65 @@ export const Services = () => {
 // Sub-component for individual card logic
 const ServiceCard = ({ service, index }) => {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
     const videoRef = useRef(null);
 
     useEffect(() => {
         if (isFlipped && videoRef.current) {
-            // Small timeout to ensure transition doesn't glitch playback
             setTimeout(() => {
-                videoRef.current.play().catch(e => console.log("Autoplay prevented:", e));
+                const playPromise = videoRef.current.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            setIsPlaying(true);
+                        })
+                        .catch(e => console.log("Autoplay prevented:", e));
+                }
             }, 300);
+        } else if (!isFlipped && videoRef.current) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+            videoRef.current.currentTime = 0;
         }
     }, [isFlipped]);
 
-    const handleFlip = () => {
-        setIsFlipped(true);
-        // Optional: Auto-play video on flip if desired, but default autoplay attribute handles it usually
-        // if (videoRef.current) videoRef.current.play();
-    };
+    const handleFlip = () => setIsFlipped(true);
 
     const handleUnflip = (e) => {
         e.stopPropagation();
         setIsFlipped(false);
+    };
+
+    const togglePlay = (e) => {
+        e.stopPropagation();
         if (videoRef.current) {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0; // Reset video
+            if (videoRef.current.paused) {
+                videoRef.current.play();
+                setIsPlaying(true);
+            } else {
+                videoRef.current.pause();
+                setIsPlaying(false);
+            }
+        }
+    };
+
+    const toggleMute = (e) => {
+        e.stopPropagation();
+        if (videoRef.current) {
+            videoRef.current.muted = !videoRef.current.muted;
+            setIsMuted(videoRef.current.muted);
+        }
+    };
+
+    const toggleFullscreen = (e) => {
+        e.stopPropagation();
+        if (videoRef.current) {
+            if (videoRef.current.requestFullscreen) {
+                videoRef.current.requestFullscreen();
+            } else if (videoRef.current.webkitEnterFullscreen) {
+                videoRef.current.webkitEnterFullscreen();
+            }
         }
     };
 
@@ -131,31 +164,53 @@ const ServiceCard = ({ service, index }) => {
                 </Card>
 
                 {/* Back Face (Video) */}
-                <div className="absolute inset-0 h-full w-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-xl bg-black border border-brand-blue/20">
-                    <div className="relative w-full h-full">
+                <div className="absolute inset-0 h-full w-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-xl bg-black border border-brand-blue/20 group">
+                    <div className="relative w-full h-full cursor-pointer" onClick={togglePlay}>
                         {/* Video Element */}
                         <video
                             ref={videoRef}
                             className="w-full h-full object-cover"
-                            controls={true} // Enabled controls
                             playsInline
                             loop
-                            // Removed autoPlay attribute to rely on useEffect for consistency
-                            muted={false} // Unmuted so user can hear if they want, but autoplay might block. Let's keep it safe. 
-                        // Actually user likely wants sound if they have controls. Let's try enabling sound.
-                        // Note: Browsers block unmuted autoplay. We'll try to play, if it fails, controls are there.
+                            muted={false}
+                            controls={false}
                         >
                             <source src={`/videos/video${index + 1}.mp4`} type="video/mp4" />
                             Seu navegador não suporta vídeos.
                         </video>
 
-                        {/* Close Button */}
+                        {/* Custom Controls Overlay */}
+
+                        {/* Play/Pause Center Indicator (Only appears momentarily or when paused) */}
+                        {!isPlaying && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
+                                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center pl-1">
+                                    <Play size={32} className="text-white fill-current" />
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Top Controls: Close */}
                         <button
                             onClick={handleUnflip}
                             className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand-red transition-colors"
                         >
                             ✕
                         </button>
+
+                        {/* Bottom Controls Bar */}
+                        <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-center bg-black/40 backdrop-blur-md rounded-full px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+
+                            {/* Fullscreen Toggle */}
+                            <button onClick={toggleFullscreen} className="text-white hover:text-brand-red transition-colors">
+                                <Maximize size={20} />
+                            </button>
+
+                            {/* Mute Toggle */}
+                            <button onClick={toggleMute} className="text-white hover:text-brand-red transition-colors">
+                                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
