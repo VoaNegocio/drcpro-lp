@@ -36,4 +36,17 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+
+  /* Force video to contain in fullscreen to avoid cropping */
+  video:fullscreen {
+    object-fit: contain;
+  }
+
+  video:-webkit-full-screen {
+    object-fit: contain;
+  }
+
+  video:-moz-full-screen {
+    object-fit: contain;
+  }
 }
