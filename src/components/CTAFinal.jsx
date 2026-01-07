@@ -1,8 +1,13 @@
 import { Button } from './ui/Button';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import teamMeetingImg from '../assets/team-meeting.png';
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
 
 export const CTAFinal = () => {
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+
     return (
         <section id="contact" className="relative py-16 md:py-24 bg-brand-dark overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
@@ -38,11 +43,18 @@ export const CTAFinal = () => {
 
                     {/* Visual Side */}
                     <div className="flex-1 w-full max-w-md md:max-w-none relative order-1 md:order-2">
-                        <div className="relative rounded-lg overflow-hidden border-4 border-white/5 shadow-2xl skew-y-1 transform transition-transform hover:skew-y-0 duration-500">
+                        <div
+                            ref={containerRef}
+                            className={`relative rounded-lg overflow-hidden border-4 border-white/5 shadow-2xl transform transition-all duration-1000 ${isInView
+                                ? 'skew-y-0 opacity-100 translate-y-0'
+                                : 'skew-y-2 opacity-0 translate-y-12'
+                                }`}
+                        >
                             <img
                                 src={teamMeetingImg}
                                 alt="Equipe DRC Pro em reunião"
-                                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                className={`w-full h-full object-cover transition-all duration-1000 hover:scale-105 ${isInView ? 'grayscale-0' : 'grayscale'
+                                    }`}
                             />
                             <div className="absolute inset-0 bg-brand-blue/20 mix-blend-overlay pointer-events-none"></div>
                         </div>

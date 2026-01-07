@@ -158,7 +158,7 @@ const ServiceCard = ({ service, index }) => {
                             onClick={handleFlip}
                             className="w-full inline-flex items-center justify-center bg-brand-red text-white font-bold uppercase tracking-wider text-sm py-4 rounded-lg hover:bg-red-700 transition-all duration-300 cursor-pointer animate-pulse-scale shadow-lg shadow-brand-red/30"
                         >
-                            Ver em ação <Play size={14} className="ml-2 fill-current" />
+                            Ver mais <Play size={14} className="ml-2 fill-current" />
                         </button>
                     </div>
                 </Card>
