@@ -32,7 +32,7 @@ export const Header = () => {
                     <img
                         src="/logodrcpro-semfundo.png"
                         alt="DRC Pro"
-                        className="h-10 md:h-12 w-auto object-contain"
+                        className="h-16 md:h-24 w-auto object-contain -my-3 md:-my-6"
                     />
                 </a>
 
@@ -47,7 +47,7 @@ export const Header = () => {
                             {link.name}
                         </a>
                     ))}
-                    <Button variant="primary" className="!px-6 !py-2 !text-xs">
+                    <Button variant="primary" className="!px-6 !py-2 !text-xs" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
                         Solicitar Proposta
                     </Button>
                 </nav>
@@ -86,7 +86,7 @@ export const Header = () => {
                                     </a>
                                 ))}
                                 <div className="w-16 h-1 bg-brand-red/20 rounded-full my-4"></div>
-                                <Button variant="primary" className="w-full max-w-xs text-lg py-4" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Button variant="primary" className="w-full max-w-xs text-lg py-4" onClick={() => { setIsMobileMenuOpen(false); window.open('https://wa.me/5511947167827', '_blank'); }}>
                                     Solicitar Proposta
                                 </Button>
                             </div>

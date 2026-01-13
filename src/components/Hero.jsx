@@ -46,12 +46,10 @@ export const Hero = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Button variant="primary" className="w-full sm:w-auto text-base py-4 sm:py-3">
-                            Solicitar Proposta Técnica
+                        <Button variant="primary" className="w-full sm:w-auto text-base py-4 sm:py-3" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
+                            Quero mais informações sobre a DRC Pro
                         </Button>
-                        <Button variant="outline" className="w-full sm:w-auto text-base py-4 sm:py-3">
-                            Conhecer Serviços
-                        </Button>
+
                     </div>
                 </motion.div>
 

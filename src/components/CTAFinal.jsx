@@ -24,7 +24,7 @@ export const CTAFinal = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <Button variant="primary" className="shadow-brand-red/20 shadow-lg text-base md:text-lg px-8 py-5 w-full sm:w-auto">
+                            <Button variant="primary" className="shadow-brand-red/20 shadow-lg text-base md:text-lg px-8 py-5 w-full sm:w-auto" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
                                 Solicitar Proposta Agora
                             </Button>
                         </div>
@@ -32,7 +32,7 @@ export const CTAFinal = () => {
                         <div className="flex flex-col gap-4 text-gray-400 pt-8 border-t border-white/10">
                             <div className="flex items-center gap-3">
                                 <Phone className="text-brand-cyan" size={20} />
-                                <span>+55 (11) 99999-9999</span>
+                                <span>+55 (11) 94716-7827</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <Mail className="text-brand-cyan" size={20} />
