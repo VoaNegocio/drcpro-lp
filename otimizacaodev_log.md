@@ -1,5 +1,20 @@
 # 🧠 KNOWLEDGE BASE: Visual, Performance & SEO
-> Documento vivo para registro de aprendizados, comandos e padrões de excelência. Use este guia para garantir 90+ em Performance e Acessibilidade em todos os projetos.
+> 🚀 **SUPER BANCO DE DADOS DE OTIMIZAÇÃO**
+> Este arquivo é a fonte central de verdade para a VOA Negócio Digital.
+> **INSTRUÇÃO PARA A I.A.:** Antes de iniciar qualquer tarefa de código, CONSULTE este arquivo para aprender com erros passados. Ao finalizar uma tarefa, ALIMENTE este arquivo com novos aprendizados.
+>
+> **Escopo:** Landing Pages, Sites Institucionais e Softwares (SaaS).
+> **Meta:** Acumular inteligência coletiva para nunca cometer o mesmo erro duas vezes e garantir excelência técnica (Performance 90+, Acessibilidade, SEO e UX Premium) em todos os projetos.
+
+---
+
+## 🤖 Protocolo de Atualização (Instrução para IA)
+Quando o usuário solicitar "adicione aqui", siga este padrão rigorosamente:
+1.  **Identifique o Ciclo**: Qual feature ou otimização foi realizada?
+2.  **Liste os Erros (❌)**: O que estava quebrado, lento ou errado antes? Seja técnico.
+3.  **Liste os Acertos (✅)**: Qual foi a solução técnica exata? (Ex: tags usadas, scripts, comandos).
+4.  **Regras de Ouro (💡)**: Transforme a solução em uma regra universal para o futuro.
+5.  **Adicione ao Final**: Insira o novo bloco antes da seção "[Próximo Ciclo...]".
 
 ---
 
