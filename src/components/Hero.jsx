@@ -14,14 +14,17 @@ export const Hero = () => {
         <section className="relative min-h-[600px] md:min-h-screen flex flex-col md:justify-center pt-24 md:pt-20 pb-0 md:pb-28 overflow-hidden bg-brand-dark">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
-                <img
-                    src="/hero-bg.webp"
-                    alt=""
-                    width="1920"
-                    height="1080"
-                    fetchpriority="high"
-                    className="w-full h-full object-cover opacity-20"
-                />
+                <picture>
+                    <source media="(max-width: 768px)" srcSet="/hero-bg-mobile.webp" />
+                    <img
+                        src="/hero-bg.webp"
+                        alt=""
+                        width="1920"
+                        height="1080"
+                        fetchpriority="high"
+                        className="w-full h-full object-cover opacity-20"
+                    />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/50 to-brand-dark pointer-events-none" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-brand-dark/20 to-brand-dark/80 pointer-events-none" />
             </div>

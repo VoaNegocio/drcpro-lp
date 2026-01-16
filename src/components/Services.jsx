@@ -23,7 +23,7 @@ export const Services = () => {
             icon: Layers,
             title: "Projetos Elétricos (executivo + SPDA)",
             description: "Iluminação, tomadas, cargas, quadros, circuitos, aterramento e SPDA — com documentação clara para execução.",
-            image: "/imgs/imgcard2.webp",
+            image: "/imgs/imgcard2-optimized.webp",
             video: "/videos/video2_opt.mp4"
         },
         {

@@ -31,10 +31,10 @@ export const Header = () => {
             <div className="container mx-auto px-4 flex justify-center md:justify-between items-center">
                 <a href="#" className="z-[60]">
                     <img
-                        src="/logodrcpro-semfundo.png"
+                        src="/logodrcpro-small.png"
                         alt="DRC Pro"
-                        width="500"
-                        height="500"
+                        width="250"
+                        height="250"
                         className="h-20 md:h-24 w-auto object-contain -my-5 md:-my-6"
                     />
                 </a>

@@ -55,9 +55,9 @@ export const CTAFinal = () => {
                                 }`}
                         >
                             <img
-                                src="/team-meeting.webp"
-                                width="1024"
-                                height="1024"
+                                src="/team-meeting-optimized.webp"
+                                width="600"
+                                height="600"
                                 alt="Equipe DRC Pro em reunião"
                                 className={`w-full h-full object-cover transition-all duration-1000 hover:scale-105 ${isInView ? 'grayscale-0' : 'grayscale'
                                     }`}
