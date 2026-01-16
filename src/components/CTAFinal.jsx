@@ -1,6 +1,6 @@
 import { Button } from './ui/Button';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import teamMeetingImg from '../assets/team-meeting.png';
+
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 
@@ -55,7 +55,9 @@ export const CTAFinal = () => {
                                 }`}
                         >
                             <img
-                                src={teamMeetingImg}
+                                src="/team-meeting.webp"
+                                width="1024"
+                                height="1024"
                                 alt="Equipe DRC Pro em reunião"
                                 className={`w-full h-full object-cover transition-all duration-1000 hover:scale-105 ${isInView ? 'grayscale-0' : 'grayscale'
                                     }`}

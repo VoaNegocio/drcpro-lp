@@ -3,14 +3,28 @@
 
 <head>
   <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-MBXB4GG8');</script>
+  <script>
+    // Lazy Load GTM
+    window.dataLayer = window.dataLayer || [];
+    function loadGTM() {
+      if (window.gtmLoaded) return;
+      window.gtmLoaded = true;
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+          'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-MBXB4GG8');
+    }
+
+    // Load after 3.5s or interaction
+    setTimeout(loadGTM, 3500);
+    window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+    window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+    window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+  </script>
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/logodrcpro-semfundo.png" />

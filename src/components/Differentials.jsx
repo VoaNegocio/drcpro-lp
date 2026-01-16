@@ -1,6 +1,5 @@
 import { CheckCircle2, CloudLightning, Users, FileBarChart2 } from 'lucide-react';
 import clsx from 'clsx';
-import bgPattern from '../assets/hero-bg.png'; // Reusing blueprint texture for subtle background
 
 export const Differentials = () => {
     const differentials = [
@@ -30,7 +29,7 @@ export const Differentials = () => {
         <section id="differentials" className="py-20 md:py-24 bg-brand-dark relative overflow-hidden">
             {/* Background Texture Re-use */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <img src={bgPattern} alt="" className="w-full h-full object-cover" />
+                <img src="/hero-bg.webp" alt="" className="w-full h-full object-cover" width="1920" height="1080" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
