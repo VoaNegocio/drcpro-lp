@@ -43,19 +43,31 @@ export const Hero = () => {
                         Projetos elétricos e hidráulicos para evitar <span className="text-red-500">retrabalho e atraso</span> na obra.
                     </h1>
 
+                    {/* Mobile Hero Image */}
+                    <div className="block md:hidden mb-6 w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                        <img
+                            src="/hero-mobile-bim.webp"
+                            alt="Tablet mostrando projeto BIM 3D de instalações"
+                            width="800"
+                            height="600"
+                            className="w-full h-auto object-cover"
+                            loading="eager"
+                        />
+                    </div>
+
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl">
                         Elaboração técnica com alto nível de detalhamento, compatibilização e rastreabilidade — entrega pronta para execução.
                     </p>
 
-                    <p className="text-sm sm:text-base text-gray-400 mb-8 leading-relaxed max-w-xl font-medium">
-                        Não executamos obra. Nosso foco é o projeto certo, antes do problema aparecer.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col sm:flex-row gap-4 mb-6">
                         <Button variant="primary" className="w-full sm:w-auto text-base py-4 sm:py-3" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
                             SOLICITAR PROPOSTA
                         </Button>
                     </div>
+
+                    <p className="text-sm sm:text-base text-gray-400 mb-8 leading-relaxed max-w-xl font-medium">
+                        Não executamos obra. Nosso foco é o projeto certo, antes do problema aparecer.
+                    </p>
                 </motion.div>
 
                 {/* Abstract/Technical Visual or Empty for now to let text breathe, 
