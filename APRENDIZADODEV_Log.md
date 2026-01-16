@@ -6274,3 +6274,22 @@ const ServiceCard = ({ service, index }) => {
     );
 };
 ```
+
+## Implementações Especiais
+### Cards Interativos com Mídia Modal
+**Data:** Fase de Refinamento (Services Section)
+**Objetivo:** Permitir que o usuário veja detalhes visuais (imagem) ou assista a um vídeo explicativo sobre cada serviço, sem poluir a interface ou carregar vídeos pesados desnecessariamente.
+**Pensamento e Decisões:**
+- **Problema:** Apenas um vídeo no card deixava o carregamento pesado e a UX "agressiva" (autoplay ou muitos players). Apenas imagem era estático demais.
+- **Solução:**
+    1.  **Verso do Card (Flip):** Clicar no botão "Ver Escopo" gira o card.
+    2.  **Imagem de Capa:** O verso mostra uma imagem estática (leve).
+    3.  **Visualização Híbrida:**
+        -   **Zoom:** Clicar na imagem abre um `ImageModal` (fullscreen) para ver detalhes.
+        -   **Vídeo:** Um botão "Ver Vídeo Completo" abre o `VideoModal` para assistir ao conteúdo.
+**Resultados:** UX fluida, performance otimizada (vídeo só carrega sob demanda) e design extremamente premium.
+
+**Arquivos Relacionados:**
+- `src/components/Services.jsx` (Lógica do Card e integração dos Modais)
+- `src/components/ui/VideoModal.jsx` (Modal de Vídeo reutilizável)
+- `src/components/ui/ImageModal.jsx` (Modal de Imagem reutilizável)

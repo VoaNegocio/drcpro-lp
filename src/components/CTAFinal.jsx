@@ -16,17 +16,21 @@ export const CTAFinal = () => {
                     {/* Content */}
                     <div className="flex-1 space-y-6 md:space-y-8 order-2 md:order-1">
                         <h2 className="text-2xl md:text-5xl font-bold text-white leading-tight font-heading">
-                            Vamos conversar sobre o <span className="text-brand-red">seu próximo projeto?</span>
+                            Vai elaborar ou revisar um <span className="text-brand-red">projeto elétrico ou hidráulico?</span>
                         </h2>
 
                         <p className="text-gray-300 text-base md:text-lg">
-                            Receba uma proposta técnica personalizada e veja como a DRC Pro pode otimizar sua entrega com método e rastreabilidade.
+                            Receba uma proposta técnica com escopo claro e entenda a entrega antes da obra começar.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <Button variant="primary" className="shadow-brand-red/20 shadow-lg text-base md:text-lg px-8 py-5 w-full sm:w-auto" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
-                                Solicitar Proposta Agora
+                        <div className="flex flex-col gap-3 pt-4">
+                            <Button variant="primary" className="shadow-brand-red/20 shadow-lg text-base md:text-lg px-8 py-5 w-full sm:w-auto uppercase tracking-wide font-bold" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
+                                SOLICITAR PROPOSTA AGORA
                             </Button>
+                            <p className="text-xs text-gray-500 flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                Atendimento via WhatsApp • Retorno com escopo e próximos passos
+                            </p>
                         </div>
 
                         <div className="flex flex-col gap-4 text-gray-400 pt-8 border-t border-white/10">
