@@ -33,6 +33,8 @@ export const Header = () => {
                     <img
                         src="/logodrcpro-semfundo.png"
                         alt="DRC Pro"
+                        width="500"
+                        height="500"
                         className="h-20 md:h-24 w-auto object-contain -my-5 md:-my-6"
                     />
                 </a>

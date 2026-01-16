@@ -1,7 +1,6 @@
 import { Button } from './ui/Button';
 import { motion } from 'framer-motion';
 import { Ruler, Building2, HardHat, FileCheck } from 'lucide-react';
-import heroBg from '../assets/hero-bg.png';
 
 export const Hero = () => {
     const stats = [
@@ -16,8 +15,11 @@ export const Hero = () => {
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
                 <img
-                    src={heroBg}
-                    alt="Technical Blueprint"
+                    src="/hero-bg.webp"
+                    alt=""
+                    width="1920"
+                    height="1080"
+                    fetchpriority="high"
                     className="w-full h-full object-cover opacity-20"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/50 to-brand-dark pointer-events-none" />
@@ -38,7 +40,7 @@ export const Hero = () => {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.2] mb-6 font-heading">
-                        Projetos elétricos e hidráulicos para evitar <span className="text-brand-red">retrabalho e atraso</span> na obra.
+                        Projetos elétricos e hidráulicos para evitar <span className="text-red-500">retrabalho e atraso</span> na obra.
                     </h1>
 
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl">

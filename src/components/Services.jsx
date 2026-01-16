@@ -16,23 +16,23 @@ export const Services = () => {
             icon: Zap,
             title: "Projetos Hidráulicos (executivo + BIM)",
             description: "Água fria/quente, esgoto, pluvial e gás — com detalhamento e compatibilização para obra.",
-            image: "/imgs/imgcard1.png",
-            video: "/videos/video1.mp4"
+            image: "/imgs/imgcard1.webp",
+            video: "/videos/video1_opt.mp4"
         },
         {
             icon: Layers,
             title: "Projetos Elétricos (executivo + SPDA)",
             description: "Iluminação, tomadas, cargas, quadros, circuitos, aterramento e SPDA — com documentação clara para execução.",
-            image: "/imgs/imgcard2.png",
-            video: "/videos/video2.mp4"
+            image: "/imgs/imgcard2.webp",
+            video: "/videos/video2_opt.mp4"
         },
         {
             icon: ClipboardCheck,
             title: "Compatibilização & Detecção de Conflitos (BIM)",
             description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
             buttonText: "VER COMO ENTREGAMOS",
-            image: "/imgs/imgcard3.png",
-            video: "/videos/video3.mp4"
+            image: "/imgs/imgcard3.webp",
+            video: "/videos/video3_opt.mp4"
         }
     ];
 
