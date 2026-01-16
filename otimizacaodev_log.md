@@ -45,12 +45,15 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 3.  **Falta de Dimensões Explícitas**: Imagens sem `width` e `height` causaram *Cumulative Layout Shift* (CLS), penalizando a performance visual.
 4.  **Vídeos "Crus"**: Vídeos de background somavam 70MB, consumindo banda excessiva do usuário.
 5.  **Scripts de Terceiros (GTM/Clarity)**: Mesmo com imagens otimizadas, o carregamento imediato de scripts de tracking travou o score em 61 (TBT alto).
+6.  **Imagens Escondidas no Código**: Otimizamos o Hero principal, mas componentes internos (`Differentials.jsx`, `CTAFinal.jsx`) ainda importavam versões PNG antigas via Javascript (`import img from ...`). Isso sabotou a performance silenciosamente.
 
 #### ✅ O que Acertamos / Soluções Aplicadas
 1.  **Conversão para WebP**: O `hero-bg.png` (747KB) virou `hero-bg.webp` (40KB). **Redução de 95%** sem perda visual.
 2.  **Preload de LCP**: Adicionamos `<link rel="preload" as="image" href="/hero-bg.webp">` no `index.html` para priorizar o carregamento visual imediato.
 3.  **Semântica Acessível**: Envolver o conteúdo principal em uma tag `<main>` resolveu o erro "Landmarks contained in the landmark navigation" e garantiu Score 90 em Acessibilidade.
 4.  **Internacionalização**: Mudar `lang="en"` para `lang="pt-BR"` é vital para leitores de tela e SEO local.
+5.  **Lazy Loading de Scripts**: Adiar o carregamento do GTM para 3.5s ou interação do usuário limpou a thread principal.
+6.  **Auditoria de Código**: Varredura manual (`grep`) encontrou imports de imagens PNG esquecidos em subcomponentes.
 
 #### 💡 O APRENDIZADO (Regras de Ouro)
 1.  **Regra do LCP**: O elemento principal da tela (LCP) **DEVE** ter menos de 100KB e ser pré-carregado (`preload`) no head.
@@ -59,6 +62,8 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 4.  **Regra do CLS**: Toda tag `<img>` precisa ter `width` e `height` (mesmo que o CSS mude o tamanho visual) para reservar espaço no layout.
 5.  **Regra da Acessibilidade**: Toda página deve ter *pelo menos* um `<main>` e os contrastes de cor devem ser testados.
 6.  **Regra dos Scripts**: Se o score travar em ~60 mesmo com imagens leves, adie o carregamento de GTM/Pixel/Clarity (Lazy Load) para liberar a CPU inicial.
+7.  **Regra do Import**: Nunca confie apenas na pasta `public`. Verifique se os componentes React (`.jsx`) não estão importando imagens pesadas diretamente (`import x from './assets/heavy.png'`). Use `grep` para achar esses vilões.
+8.  **Regra das Fontes**: Google Fonts padrão (`<link rel="stylesheet">`) bloqueiam a renderização. Use a técnica `media="print" onload="this.media='all'"` para carregamento assíncrono e ganhe ~800ms no FCP.
 
 ---
 
