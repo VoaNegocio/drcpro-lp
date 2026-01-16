@@ -71,5 +71,26 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 
 ---
 
+### 📅 Ciclo: Refinamento Mobile - Imagens & Responsividade (Jan 2026 - 1.4)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Imagens Gigantes no Mobile**: O Hero carregava a mesma imagem de 1920px (webp) para celulares, desperdiçando dados e atrasando o LCP.
+2.  **Imagens de Conteúdo**: Fotos de "reunião" e "cards de projetos" estavam redimensionadas via CSS, mas o arquivo original era muito maior que a área de exibição (ex: 1024px exibidos em 300px).
+3.  **Logo Pesado**: O logo no header era um arquivo maior redimensionado pelo navegador.
+4.  **Preload Ineficiente**: O preload único do Hero não diferenciava dispositivos, pré-carregando a versão desktop no mobile (ou vice-versa se alterado).
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **Imagens Responsivas (<picture>)**: Implementamos a tag `<picture>` no Hero para servir `hero-bg-mobile.webp` (800x800) apenas para telas < 768px.
+2.  **Redimensionamento "Hard"**: Criamos versões otimizadas fisicamente (`sips` / `ffmpeg`) para o logo (`logodrcpro-small.png`) e imagens de seção (`team-meeting-optimized.webp`, `imgcard2-optimized.webp`).
+3.  **Preload Condicional**: Adicionamos `media="(max-width: 768px)"` no link de preload para garantir que o navegador baixe apenas a imagem correta para o dispositivo.
+4.  **Atributos de Prioridade**: Verificamos e mantivemos `fetchpriority="high"` na imagem LCP correta dentro do bloco `<picture>`.
+
+#### 💡 O APRENDIZADO
+1.  **Regra do Picture**: Para imagens de Hero (LCP), use `<picture>` com `<source media="...">` para trocar o arquivo físico entre mobile e desktop. CSS `background-image` não é ideal para LCP.
+2.  **Regra do Preload Responsivo**: O `<link rel="preload">` suporta o atributo `media`. Use-o para casar com os breakpoints do CSS invés de baixar imagens duplicadas.
+3.  **Regra da Física**: Se a imagem aparece com 300px na tela, o arquivo não deve ter 1000px. Redimensione no build ou manualmente para economizar bytes críticos.
+
+---
+
 ### [Próximo Ciclo...]
 *Adicione novos aprendizados aqui sem remover os anteriores.*
