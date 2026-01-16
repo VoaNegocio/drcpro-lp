@@ -46,6 +46,8 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 4.  **Vídeos "Crus"**: Vídeos de background somavam 70MB, consumindo banda excessiva do usuário.
 5.  **Scripts de Terceiros (GTM/Clarity)**: Mesmo com imagens otimizadas, o carregamento imediato de scripts de tracking travou o score em 61 (TBT alto).
 6.  **Imagens Escondidas no Código**: Otimizamos o Hero principal, mas componentes internos (`Differentials.jsx`, `CTAFinal.jsx`) ainda importavam versões PNG antigas via Javascript (`import img from ...`). Isso sabotou a performance silenciosamente.
+7.  **Fontes Bloqueantes**: O Lighthouse acusou 854ms de "Render Blocking" causados pelo carregamento padrão do Google Fonts (`<link rel="stylesheet">`). O usuário via uma tela branca por quase 1 segundo.
+8.  **Conflito de Portas no Teste**: Ao rodar múltiplos testes (`npm run preview`), o Vite mudou para a porta 4174 silenciosamente porque a 4173 estava presa, invalidando auditorias que miravam a porta padrão.
 
 #### ✅ O que Acertamos / Soluções Aplicadas
 1.  **Conversão para WebP**: O `hero-bg.png` (747KB) virou `hero-bg.webp` (40KB). **Redução de 95%** sem perda visual.
@@ -54,6 +56,7 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 4.  **Internacionalização**: Mudar `lang="en"` para `lang="pt-BR"` é vital para leitores de tela e SEO local.
 5.  **Lazy Loading de Scripts**: Adiar o carregamento do GTM para 3.5s ou interação do usuário limpou a thread principal.
 6.  **Auditoria de Código**: Varredura manual (`grep`) encontrou imports de imagens PNG esquecidos em subcomponentes.
+7.  **Fonts Async**: Implementamos o hack `media="print" onload="this.media='all'"` no link do Google Fonts. Resultado: O tempo de bloqueio de renderização caiu para zero nesta métrica.
 
 #### 💡 O APRENDIZADO (Regras de Ouro)
 1.  **Regra do LCP**: O elemento principal da tela (LCP) **DEVE** ter menos de 100KB e ser pré-carregado (`preload`) no head.
@@ -64,6 +67,7 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 6.  **Regra dos Scripts**: Se o score travar em ~60 mesmo com imagens leves, adie o carregamento de GTM/Pixel/Clarity (Lazy Load) para liberar a CPU inicial.
 7.  **Regra do Import**: Nunca confie apenas na pasta `public`. Verifique se os componentes React (`.jsx`) não estão importando imagens pesadas diretamente (`import x from './assets/heavy.png'`). Use `grep` para achar esses vilões.
 8.  **Regra das Fontes**: Google Fonts padrão (`<link rel="stylesheet">`) bloqueiam a renderização. Use a técnica `media="print" onload="this.media='all'"` para carregamento assíncrono e ganhe ~800ms no FCP.
+9.  **Regra do Processo (Kill)**: Antes de rodar uma nova auditoria de performance, use `pkill -f "vite"` para garantir que não está auditando uma versão antiga do servidor presa na porta padrão.
 
 ---
 
