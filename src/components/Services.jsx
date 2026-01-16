@@ -1,27 +1,38 @@
 import { useState, useRef, useEffect } from 'react';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
-import { Zap, Layers, ClipboardCheck, ArrowRight, Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
+import { VideoModal } from './ui/VideoModal';
+import { ImageModal } from './ui/ImageModal';
+import { Zap, Layers, ClipboardCheck, ArrowRight, Play, Pause, Volume2, VolumeX, Maximize, ZoomIn } from 'lucide-react';
 
 export const Services = () => {
     const [activeSlide, setActiveSlide] = useState(0);
+    const [activeVideo, setActiveVideo] = useState(null);
+    const [activeImage, setActiveImage] = useState(null);
     const scrollRef = useRef(null);
 
     const services = [
         {
             icon: Zap,
-            title: "Projetos Complementares",
-            description: "Elaboração técnica de instalações elétricas, hidráulicas, SPDA, gás e prevenção contra incêndio. Tudo 100% compatibilizado com a arquitetura.",
+            title: "Projetos Hidráulicos (executivo + BIM)",
+            description: "Água fria/quente, esgoto, pluvial e gás — com detalhamento e compatibilização para obra.",
+            image: "/imgs/imgcard1.png",
+            video: "/videos/video1.mp4"
         },
         {
             icon: Layers,
-            title: "Coordenação e Compatibilização",
-            description: "Reduza conflitos entre disciplinas e elimine retrabalhos na obra. Entregas por fase com rastreabilidade total e integração BIM.",
+            title: "Projetos Elétricos (executivo + SPDA)",
+            description: "Iluminação, tomadas, cargas, quadros, circuitos, aterramento e SPDA — com documentação clara para execução.",
+            image: "/imgs/imgcard2.png",
+            video: "/videos/video2.mp4"
         },
         {
             icon: ClipboardCheck,
-            title: "Auditorias Técnicas de Ativos",
-            description: "Inspeções detalhadas para retrofit, regularização e segurança. Ideal para shoppings, galpões logísticos e grandes edifícios.",
+            title: "Compatibilização & Detecção de Conflitos (BIM)",
+            description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
+            buttonText: "VER COMO ENTREGAMOS",
+            image: "/imgs/imgcard3.png",
+            video: "/videos/video3.mp4"
         }
     ];
 
@@ -41,7 +52,7 @@ export const Services = () => {
                 <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
                     <span className="text-brand-red font-bold tracking-wider uppercase text-xs md:text-sm mb-2 block">O que fazemos</span>
                     <h2 className="text-2xl md:text-4xl font-bold text-brand-dark mb-6 font-heading leading-tight">
-                        Soluções completas de engenharia para garantir a segurança e eficiência do seu projeto
+                        Projetos de instalações para garantir segurança e previsibilidade na execução
                     </h2>
                 </div>
 
@@ -52,7 +63,15 @@ export const Services = () => {
                     className="flex md:grid md:grid-cols-3 gap-6 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide"
                 >
                     {services.map((service, index) => {
-                        return <ServiceCard key={index} service={service} index={index} />;
+                        return (
+                            <ServiceCard
+                                key={index}
+                                service={service}
+                                index={index}
+                                onPlayVideo={() => setActiveVideo(service.video)}
+                                onViewImage={() => setActiveImage(service.image)}
+                            />
+                        );
                     })}
                 </div>
 
@@ -66,73 +85,31 @@ export const Services = () => {
                     ))}
                 </div>
             </div>
+
+            <VideoModal
+                isOpen={!!activeVideo}
+                onClose={() => setActiveVideo(null)}
+                videoSrc={activeVideo}
+            />
+
+            <ImageModal
+                isOpen={!!activeImage}
+                onClose={() => setActiveImage(null)}
+                imageSrc={activeImage}
+            />
         </section>
     );
 };
 
 // Sub-component for individual card logic
-const ServiceCard = ({ service, index }) => {
+const ServiceCard = ({ service, index, onPlayVideo, onViewImage }) => {
     const [isFlipped, setIsFlipped] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isMuted, setIsMuted] = useState(false);
-    const videoRef = useRef(null);
-
-    useEffect(() => {
-        if (isFlipped && videoRef.current) {
-            setTimeout(() => {
-                const playPromise = videoRef.current.play();
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            setIsPlaying(true);
-                        })
-                        .catch(e => console.log("Autoplay prevented:", e));
-                }
-            }, 300);
-        } else if (!isFlipped && videoRef.current) {
-            videoRef.current.pause();
-            setIsPlaying(false);
-            videoRef.current.currentTime = 0;
-        }
-    }, [isFlipped]);
 
     const handleFlip = () => setIsFlipped(true);
 
     const handleUnflip = (e) => {
         e.stopPropagation();
         setIsFlipped(false);
-    };
-
-    const togglePlay = (e) => {
-        e.stopPropagation();
-        if (videoRef.current) {
-            if (videoRef.current.paused) {
-                videoRef.current.play();
-                setIsPlaying(true);
-            } else {
-                videoRef.current.pause();
-                setIsPlaying(false);
-            }
-        }
-    };
-
-    const toggleMute = (e) => {
-        e.stopPropagation();
-        if (videoRef.current) {
-            videoRef.current.muted = !videoRef.current.muted;
-            setIsMuted(videoRef.current.muted);
-        }
-    };
-
-    const toggleFullscreen = (e) => {
-        e.stopPropagation();
-        if (videoRef.current) {
-            if (videoRef.current.requestFullscreen) {
-                videoRef.current.requestFullscreen();
-            } else if (videoRef.current.webkitEnterFullscreen) {
-                videoRef.current.webkitEnterFullscreen();
-            }
-        }
     };
 
     return (
@@ -158,57 +135,56 @@ const ServiceCard = ({ service, index }) => {
                             onClick={handleFlip}
                             className="w-full inline-flex items-center justify-center bg-brand-red text-white font-bold uppercase tracking-wider text-sm py-4 rounded-lg hover:bg-red-700 transition-all duration-300 cursor-pointer animate-pulse-scale shadow-lg shadow-brand-red/30"
                         >
-                            Ver mais <Play size={14} className="ml-2 fill-current" />
+                            {service.buttonText || "VER ESCOPO"} <Play size={14} className="ml-2 fill-current" />
                         </button>
                     </div>
                 </Card>
 
-                {/* Back Face (Video) */}
-                <div className="absolute inset-0 h-full w-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-xl bg-black border border-brand-blue/20 group">
-                    <div className="relative w-full h-full cursor-pointer" onClick={togglePlay}>
-                        {/* Video Element */}
-                        <video
-                            ref={videoRef}
-                            className="w-full h-full object-cover"
-                            playsInline
-                            loop
-                            muted={false}
-                            controls={false}
+                {/* Back Face (Image + Video Button) */}
+                <div className="absolute inset-0 h-full w-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-xl bg-gray-900 border border-brand-blue/20 group">
+                    <div className="relative w-full h-full flex flex-col">
+
+                        {/* Image Container */}
+                        <div
+                            className="relative flex-grow overflow-hidden cursor-zoom-in group/image"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onViewImage();
+                            }}
                         >
-                            <source src={`/videos/video${index + 1}.mp4`} type="video/mp4" />
-                            Seu navegador não suporta vídeos.
-                        </video>
+                            <img
+                                src={service.image}
+                                alt={service.title}
+                                className="w-full h-full object-cover opacity-80 group-hover/image:opacity-100 transition-opacity duration-500 transform group-hover/image:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
 
-                        {/* Custom Controls Overlay */}
-
-                        {/* Play/Pause Center Indicator (Only appears momentarily or when paused) */}
-                        {!isPlaying && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
-                                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center pl-1">
-                                    <Play size={32} className="text-white fill-current" />
-                                </div>
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 pb-8">
+                                <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 border border-white/20">
+                                    <ZoomIn size={14} /> Ampliar Imagem
+                                </span>
                             </div>
-                        )}
 
-                        {/* Top Controls: Close */}
-                        <button
-                            onClick={handleUnflip}
-                            className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand-red transition-colors"
-                        >
-                            ✕
-                        </button>
-
-                        {/* Bottom Controls Bar */}
-                        <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-center bg-black/40 backdrop-blur-md rounded-full px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-
-                            {/* Fullscreen Toggle */}
-                            <button onClick={toggleFullscreen} className="text-white hover:text-brand-red transition-colors">
-                                <Maximize size={20} />
+                            {/* Close Button */}
+                            <button
+                                onClick={handleUnflip}
+                                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand-red transition-colors border border-white/10"
+                            >
+                                ✕
                             </button>
+                        </div>
 
-                            {/* Mute Toggle */}
-                            <button onClick={toggleMute} className="text-white hover:text-brand-red transition-colors">
-                                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                        {/* Bottom Actions */}
+                        <div className="p-6 md:p-8 bg-brand-dark relative z-10 text-center border-t border-white/10">
+                            <h4 className="text-lg font-bold text-white mb-4 line-clamp-1">{service.title}</h4>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onPlayVideo();
+                                }}
+                                className="w-full inline-flex items-center justify-center bg-transparent border-2 border-brand-red text-white hover:bg-brand-red font-bold uppercase tracking-wider text-sm py-3 rounded-lg transition-all duration-300 gap-2 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
+                            >
+                                <Play size={16} className="fill-current" /> VER VÍDEO COMPLETO
                             </button>
                         </div>
                     </div>
