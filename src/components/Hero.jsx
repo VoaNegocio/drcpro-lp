@@ -55,6 +55,7 @@ export const Hero = () => {
                             height="600"
                             className="w-full h-auto object-cover"
                             loading="eager"
+                            fetchpriority="high"
                         />
                     </div>
 

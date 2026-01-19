@@ -8,10 +8,10 @@ export const Footer = () => {
 
                     <div className="text-center md:text-left">
                         <img
-                            src="/logodrcpro-semfundo.png"
+                            src="/logodrcpro-footer.png"
                             alt="DRC Pro"
-                            width="500"
-                            height="500"
+                            width="150"
+                            height="150"
                             className="h-12 w-auto object-contain mx-auto md:mx-0 mb-2"
                         />
                         <p className="text-gray-500 text-sm mt-2">

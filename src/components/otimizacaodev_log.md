@@ -107,5 +107,25 @@ npx lighthouse http://localhost:4173 --output json --output-path ./report.json -
 
 ---
 
+### 📅 Ciclo: Rumo ao Score 100 - Ajuste Fino (Jan 2026 - 1.5)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Imagens "Quase" Otimizadas**: O Hero mobile estava com 1024px físico, mas exibido a 662px. O Lighthouse reclamou dessa "gordura" de 50KB.
+2.  **Logos Superdimensionados**: Logos auxiliares (footer/header) tinham 500px mas eram exibidos com 80px.
+3.  **Falta de Prioridade**: O navegador não sabia que a imagem do Hero era a mais importante (`fetchpriority="high"` ausente).
+4.  **Scripts Ansiosos**: O atraso de 3.5s no GTM ainda colidia com o fim do carregamento de imagens em redes lentas.
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **Redimensionamento Cirúrgico**: Reduzimos `hero-mobile-bim` para 800px (margem segura) e criamos `logodrcpro-footer.png` específico com 150px.
+2.  **Fetch Priority**: Adicionamos `fetchpriority="high"` explicitamente na tag `<img>` do mobile.
+3.  **Timeout Estendido**: Aumentamos o lazy load do GTM para 5000ms (5s), garantindo que a thread principal esteja 100% livre para o LCP/FCP inicial.
+
+#### 💡 O APRENDIZADO
+1.  **Regra da Prioridade Mobile**: Em LCP de mobile, `loading="eager"` não basta. Use `fetchpriority="high"` para furar a fila de requests.
+2.  **Regra do Logo**: Logos de footer raramente precisam de mais de 150-200px de largura física. Não reutilize o logo gigantão do header.
+3.  **Regra de Ouro do Script**: Se o site já carrega visualmente em 1.5s, empurre os scripts de tracking para 5s. O usuário não clica em nada antes disso.
+
+---
+
 ### [Próximo Ciclo...]
 *Adicione novos aprendizados aqui sem remover os anteriores.*
