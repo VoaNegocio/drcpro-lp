@@ -12,11 +12,9 @@ export const Footer = () => {
                             alt="DRCpro"
                             width="150"
                             height="150"
-                            className="h-12 w-auto object-contain mx-auto md:mx-0 mb-2"
+                            className="h-32 w-auto object-contain mx-auto md:mx-0 mb-2"
                         />
-                        <p className="text-gray-500 text-sm mt-2">
-                            Engenharia Consultiva & Projetos Complementares
-                        </p>
+
                     </div>
 
                     <div className="text-gray-500 text-sm text-center md:text-right">

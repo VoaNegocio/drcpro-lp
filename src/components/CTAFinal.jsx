@@ -19,9 +19,7 @@ export const CTAFinal = () => {
                             Vai elaborar ou revisar um <span className="text-brand-red">projeto elétrico ou hidráulico?</span>
                         </h2>
 
-                        <p className="text-gray-300 text-base md:text-lg">
-                            Receba uma proposta técnica com escopo claro e entenda a entrega antes da obra começar.
-                        </p>
+
 
                         <div className="flex flex-col gap-3 pt-4">
                             <Button variant="primary" className="shadow-brand-red/20 shadow-lg text-base md:text-lg px-8 py-5 w-full sm:w-auto uppercase tracking-wide font-bold" onClick={() => window.open('https://wa.me/5511947167827', '_blank')}>
