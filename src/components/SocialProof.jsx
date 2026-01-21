@@ -31,7 +31,7 @@ export const SocialProof = () => {
 
                     <blockquote className="relative z-10 pt-4">
                         <p className="text-xl md:text-4xl font-medium text-brand-dark italic mb-6 md:mb-8 leading-relaxed font-heading">
-                            "Com a DRC Pro, os projetos chegam no prazo e conseguimos prever as etapas sem surpresa. A organização técnica é o grande diferencial."
+                            "Com a DRCpro, os projetos chegam no prazo e conseguimos prever as etapas sem surpresa. A organização técnica é o grande diferencial."
                         </p>
                         <footer className="text-gray-600">
                             <strong className="block text-brand-dark text-lg font-bold">Michel</strong>

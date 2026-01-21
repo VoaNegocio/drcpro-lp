@@ -9,7 +9,7 @@ export const Footer = () => {
                     <div className="text-center md:text-left">
                         <img
                             src="/logodrcpro-footer.png"
-                            alt="DRC Pro"
+                            alt="DRCpro"
                             width="150"
                             height="150"
                             className="h-12 w-auto object-contain mx-auto md:mx-0 mb-2"
@@ -20,7 +20,7 @@ export const Footer = () => {
                     </div>
 
                     <div className="text-gray-500 text-sm text-center md:text-right">
-                        <p>&copy; {currentYear} DRC Pro. Todos os direitos reservados.</p>
+                        <p>&copy; {currentYear} DRCpro. Todos os direitos reservados.</p>
                         <p className="mt-1">
                             Desenvolvido com <span className="text-red-500">♥</span> por Agência VOA
                         </p>

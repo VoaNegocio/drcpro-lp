@@ -38,10 +38,10 @@ export const Differentials = () => {
                     {/* Left Content */}
                     <div className="text-white order-1 lg:order-1">
                         <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-9 leading-tight font-heading">
-                            Por que escolhem a <span className="text-brand-red">DRC Pro</span> para projetos elétricos e hidráulicos?
+                            Por que escolhem a <span className="text-brand-red">DRCpro</span> para projetos elétricos e hidráulicos?
                         </h2>
                         <p className="text-gray-400 text-base md:text-lg mb-5 max-w-md">
-                            Não entregamos “desenho”. Entregamos projeto executivo para a obra seguir sem improviso — com método e qualidade.
+                            Não entregamos desenhos. Entregamos o projeto para a sua obra seguir sem improvisos - com método e qualidade.
                         </p>
 
                         <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
@@ -59,40 +59,7 @@ export const Differentials = () => {
                         </div>
                     </div>
 
-                    {/* Right Visual - Abstract Representation of "Traceability" */}
-                    <div className="order-2 lg:order-2 relative h-full min-h-[300px] md:min-h-[400px] border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm p-6 md:p-8 flex flex-col justify-center mb-8 lg:mb-0">
-                        {/* Visual elements simulating a timeline or process */}
-                        <div className="space-y-8 relative">
-                            {/* Connector Line */}
-                            <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-blue to-transparent md:block hidden opacity-30"></div>
 
-                            {[
-                                { num: '01', label: 'Análise de riscos e interferências', width: '40%' },
-                                { num: '02', label: 'Compatibilização BIM das instalações', width: '70%' },
-                                { num: '03', label: 'Liberação executiva para obra', width: '100%' }
-                            ].map((step) => (
-                                <div key={step.num} className="flex items-center gap-4 md:gap-6 relative">
-                                    <div className="w-12 h-12 rounded-full bg-brand-blue/20 border border-brand-blue/50 flex items-center justify-center text-brand-cyan font-bold shrink-0 z-10 backdrop-blur-md">
-                                        {step.num}
-                                    </div>
-                                    <div className="flex-grow">
-                                        <h5 className="text-white font-medium text-sm md:text-base mb-2">{step.label}</h5>
-                                        <div className="h-3 md:h-4 bg-white/5 rounded-full overflow-hidden">
-                                            <div
-                                                className="h-full bg-brand-blue/60"
-                                                style={{ width: step.width }}
-                                            ></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-
-                            <div className="mt-8 p-6 bg-brand-red/90 rounded-xl text-white text-center transform rotate-1 hover:rotate-0 transition-transform cursor-default">
-                                <p className="font-bold text-xl">Menos retrabalho em obra</p>
-                                <p className="text-xs opacity-80 uppercase tracking-widest mt-1">Meta: compatibilização antes do canteiro</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

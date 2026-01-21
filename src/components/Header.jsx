@@ -32,7 +32,7 @@ export const Header = () => {
                 <a href="#" className="z-[60]">
                     <img
                         src="/logodrcpro-small.png"
-                        alt="DRC Pro"
+                        alt="DRCpro"
                         width="250"
                         height="250"
                         className="h-20 md:h-24 w-auto object-contain -my-5 md:-my-6"

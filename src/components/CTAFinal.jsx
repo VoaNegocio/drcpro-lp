@@ -58,7 +58,7 @@ export const CTAFinal = () => {
                                 src="/team-meeting-optimized.webp"
                                 width="600"
                                 height="600"
-                                alt="Equipe DRC Pro em reunião"
+                                alt="Equipe DRCpro em reunião"
                                 className={`w-full h-full object-cover transition-all duration-1000 hover:scale-105 ${isInView ? 'grayscale-0' : 'grayscale'
                                     }`}
                             />

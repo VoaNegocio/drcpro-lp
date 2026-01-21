@@ -43,7 +43,7 @@ export const Hero = () => {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.2] mb-6 font-heading">
-                        Projetos elétricos e hidráulicos para evitar <span className="text-red-500">retrabalho e atraso</span> na obra.
+                        Projetos de Sistemas Prediais para evitar <span className="text-red-500">retrabalho e atraso</span> na obra.
                     </h1>
 
                     {/* Mobile Hero Image */}
