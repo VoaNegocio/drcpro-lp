@@ -5,9 +5,9 @@ import { Ruler, Building2, HardHat, FileCheck } from 'lucide-react';
 export const Hero = () => {
     const stats = [
         { icon: Ruler, value: '+3M m²', label: 'Projetados' },
-        { icon: Building2, value: '+30', label: 'Tipos de Projetos' },
-        { icon: HardHat, value: '+500', label: 'Clientes Atendidos' },
-        { icon: FileCheck, value: '6', label: 'Coord. Dedicados' },
+        { icon: Building2, value: '+30', label: 'obras fiscalizadas simultâneas' },
+        { icon: HardHat, value: '+6', label: 'condomínios assessorados' },
+        { icon: FileCheck, value: '+50', label: 'projetos legalizados' },
     ];
 
     return (
