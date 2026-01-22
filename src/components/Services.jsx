@@ -24,7 +24,7 @@ export const Services = () => {
             title: "Projetos Elétricos",
             description: "Iluminação, tomadas, cargas, quadros, circuitos, aterramento e SPDA — com documentação clara para execução.",
             image: "/imgs/imggrid2.png",
-            video: "/videos/video2_opt.mp4"
+            video: "/videos/videogrid2-rafael-pnc.mp4"
         },
         {
             icon: ClipboardCheck,
@@ -32,7 +32,7 @@ export const Services = () => {
             description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
             buttonText: "VER COMO ENTREGAMOS",
             image: "/imgs/imgcard3.webp",
-            video: "/videos/video3_opt.mp4"
+            video: "/videos/videogrid3-marco-pnc.mp4"
         }
     ];
 
