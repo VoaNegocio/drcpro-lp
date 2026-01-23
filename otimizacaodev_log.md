@@ -1,0 +1,149 @@
+# 🧠 KNOWLEDGE BASE: Visual, Performance & SEO
+> 🚀 **SUPER BANCO DE DADOS DE OTIMIZAÇÃO**
+> Este arquivo é a fonte central de verdade para a VOA Negócio Digital.
+> **INSTRUÇÃO PARA A I.A.:** Antes de iniciar qualquer tarefa de código, CONSULTE este arquivo para aprender com erros passados. Ao finalizar uma tarefa, ALIMENTE este arquivo com novos aprendizados.
+>
+> **Escopo:** Landing Pages, Sites Institucionais e Softwares (SaaS).
+> **Meta:** Acumular inteligência coletiva para nunca cometer o mesmo erro duas vezes e garantir excelência técnica (Performance 90+, Acessibilidade, SEO e UX Premium) em todos os projetos.
+
+---
+
+## 🤖 Protocolo de Atualização (Instrução para IA)
+Quando o usuário solicitar "adicione aqui", siga este padrão rigorosamente:
+1.  **Identifique o Ciclo**: Qual feature ou otimização foi realizada?
+2.  **Liste os Erros (❌)**: O que estava quebrado, lento ou errado antes? Seja técnico.
+3.  **Liste os Acertos (✅)**: Qual foi a solução técnica exata? (Ex: tags usadas, scripts, comandos).
+4.  **Regras de Ouro (💡)**: Transforme a solução em uma regra universal para o futuro.
+5.  **Adicione ao Final**: Insira o novo bloco antes da seção "[Próximo Ciclo...]".
+
+---
+
+## 🛠️ Guia de Comandos (Cheat Sheet)
+
+### 1. Otimização de Imagens (WebP)
+Converta imagens pesadas (PNG/JPG) para WebP de nova geração.
+```bash
+# Converter imagem única mantendo qualidade (q=75)
+ffmpeg -i input.png -quality 75 output.webp
+
+# Converter todas as PNGs de uma pasta (loop)
+for file in *.png; do ffmpeg -i "$file" -quality 75 "${file%.png}.webp"; done
+```
+
+### 2. Compressão de Vídeo (Otimizado para Web)
+Reduz drasticamente o tamanho sem perder qualidade visual perceptível.
+```bash
+# Codec h264, CRF 28 (equilíbrio ideal tamanho/qualidade), preset faster
+ffmpeg -i input.mp4 -vcodec libx264 -crf 28 -preset faster -acodec aac -b:a 128k output_opt.mp4
+```
+
+### 3. Teste de Performance (Lighthouse CLI)
+Rode sempre contra o build de **produção**, nunca em dev.
+```bash
+# 1. Buildar o projeto
+npm run build
+# 2. Servir o preview
+npm run preview
+# 3. Rodar auditoria (em outro terminal)
+npx lighthouse http://localhost:4173 --output json --output-path ./report.json --device=mobile --chrome-flags="--headless"
+```
+
+---
+
+## 📂 Registro de Aprendizados (Log)
+
+### 📅 Ciclo: Otimização Mobile DRC Pro (Jan 2026)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Imagem Hero Gigante**: Usar um PNG de 750KB no LCP (Largest Contentful Paint) causou um tempo de carregamento de 24s em conexões 3G, jogando o score para 47.
+2.  **Teste em Ambiente Dev**: Rodar o Lighthouse com `npm run dev` resultou em pontuações falsamente baixas (51) devido ao overhead do Vite em desenvolvimento. O teste real deve ser em Prod.
+3.  **Falta de Dimensões Explícitas**: Imagens sem `width` e `height` causaram *Cumulative Layout Shift* (CLS), penalizando a performance visual.
+4.  **Vídeos "Crus"**: Vídeos de background somavam 70MB, consumindo banda excessiva do usuário.
+5.  **Scripts de Terceiros (GTM/Clarity)**: Mesmo com imagens otimizadas, o carregamento imediato de scripts de tracking travou o score em 61 (TBT alto).
+6.  **Imagens Escondidas no Código**: Otimizamos o Hero principal, mas componentes internos (`Differentials.jsx`, `CTAFinal.jsx`) ainda importavam versões PNG antigas via Javascript (`import img from ...`). Isso sabotou a performance silenciosamente.
+7.  **Fontes Bloqueantes**: O Lighthouse acusou 854ms de "Render Blocking" causados pelo carregamento padrão do Google Fonts (`<link rel="stylesheet">`). O usuário via uma tela branca por quase 1 segundo.
+8.  **Conflito de Portas no Teste**: Ao rodar múltiplos testes (`npm run preview`), o Vite mudou para a porta 4174 silenciosamente porque a 4173 estava presa, invalidando auditorias que miravam a porta padrão.
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **Conversão para WebP**: O `hero-bg.png` (747KB) virou `hero-bg.webp` (40KB). **Redução de 95%** sem perda visual.
+2.  **Preload de LCP**: Adicionamos `<link rel="preload" as="image" href="/hero-bg.webp">` no `index.html` para priorizar o carregamento visual imediato.
+3.  **Semântica Acessível**: Envolver o conteúdo principal em uma tag `<main>` resolveu o erro "Landmarks contained in the landmark navigation" e garantiu Score 90 em Acessibilidade.
+4.  **Internacionalização**: Mudar `lang="en"` para `lang="pt-BR"` é vital para leitores de tela e SEO local.
+5.  **Lazy Loading de Scripts**: Adiar o carregamento do GTM para 3.5s ou interação do usuário limpou a thread principal.
+6.  **Auditoria de Código**: Varredura manual (`grep`) encontrou imports de imagens PNG esquecidos em subcomponentes.
+7.  **Fonts Async**: Implementamos o hack `media="print" onload="this.media='all'"` no link do Google Fonts. Resultado: O tempo de bloqueio de renderização caiu para zero nesta métrica.
+
+#### 💡 O APRENDIZADO (Regras de Ouro)
+1.  **Regra do LCP**: O elemento principal da tela (LCP) **DEVE** ter menos de 100KB e ser pré-carregado (`preload`) no head.
+2.  **Regra do WebP**: Nunca use PNG/JPG para fotos em produção. Sempre converta para WebP.
+3.  **Regra do Build**: Performance só se mede no `npm run preview` (versão de produção). Testes em dev são apenas para depuração funcional.
+4.  **Regra do CLS**: Toda tag `<img>` precisa ter `width` e `height` (mesmo que o CSS mude o tamanho visual) para reservar espaço no layout.
+5.  **Regra da Acessibilidade**: Toda página deve ter *pelo menos* um `<main>` e os contrastes de cor devem ser testados.
+6.  **Regra dos Scripts**: Se o score travar em ~60 mesmo com imagens leves, adie o carregamento de GTM/Pixel/Clarity (Lazy Load) para liberar a CPU inicial.
+7.  **Regra do Import**: Nunca confie apenas na pasta `public`. Verifique se os componentes React (`.jsx`) não estão importando imagens pesadas diretamente (`import x from './assets/heavy.png'`). Use `grep` para achar esses vilões.
+8.  **Regra das Fontes**: Google Fonts padrão (`<link rel="stylesheet">`) bloqueiam a renderização. Use a técnica `media="print" onload="this.media='all'"` para carregamento assíncrono e ganhe ~800ms no FCP.
+9.  **Regra do Processo (Kill)**: Antes de rodar uma nova auditoria de performance, use `pkill -f "vite"` para garantir que não está auditando uma versão antiga do servidor presa na porta padrão.
+
+---
+
+### 📅 Ciclo: Refinamento Mobile - Imagens & Responsividade (Jan 2026 - 1.4)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Imagens Gigantes no Mobile**: O Hero carregava a mesma imagem de 1920px (webp) para celulares, desperdiçando dados e atrasando o LCP.
+2.  **Imagens de Conteúdo**: Fotos de "reunião" e "cards de projetos" estavam redimensionadas via CSS, mas o arquivo original era muito maior que a área de exibição (ex: 1024px exibidos em 300px).
+3.  **Logo Pesado**: O logo no header era um arquivo maior redimensionado pelo navegador.
+4.  **Preload Ineficiente**: O preload único do Hero não diferenciava dispositivos, pré-carregando a versão desktop no mobile (ou vice-versa se alterado).
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **Imagens Responsivas (<picture>)**: Implementamos a tag `<picture>` no Hero para servir `hero-bg-mobile.webp` (800x800) apenas para telas < 768px.
+2.  **Redimensionamento "Hard"**: Criamos versões otimizadas fisicamente (`sips` / `ffmpeg`) para o logo (`logodrcpro-small.png`) e imagens de seção (`team-meeting-optimized.webp`, `imgcard2-optimized.webp`).
+3.  **Preload Condicional**: Adicionamos `media="(max-width: 768px)"` no link de preload para garantir que o navegador baixe apenas a imagem correta para o dispositivo.
+4.  **Atributos de Prioridade**: Verificamos e mantivemos `fetchpriority="high"` na imagem LCP correta dentro do bloco `<picture>`.
+
+#### 💡 O APRENDIZADO
+1.  **Regra do Picture**: Para imagens de Hero (LCP), use `<picture>` com `<source media="...">` para trocar o arquivo físico entre mobile e desktop. CSS `background-image` não é ideal para LCP.
+2.  **Regra do Preload Responsivo**: O `<link rel="preload">` suporta o atributo `media`. Use-o para casar com os breakpoints do CSS invés de baixar imagens duplicadas.
+3.  **Regra da Física**: Se a imagem aparece com 300px na tela, o arquivo não deve ter 1000px. Redimensione no build ou manualmente para economizar bytes críticos.
+
+---
+
+### 📅 Ciclo: Rumo ao Score 100 - Ajuste Fino (Jan 2026 - 1.5)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Imagens "Quase" Otimizadas**: O Hero mobile estava com 1024px físico, mas exibido a 662px. O Lighthouse reclamou dessa "gordura" de 50KB.
+2.  **Logos Superdimensionados**: Logos auxiliares (footer/header) tinham 500px mas eram exibidos com 80px.
+3.  **Falta de Prioridade**: O navegador não sabia que a imagem do Hero era a mais importante (`fetchpriority="high"` ausente).
+4.  **Scripts Ansiosos**: O atraso de 3.5s no GTM ainda colidia com o fim do carregamento de imagens em redes lentas.
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **Redimensionamento Cirúrgico**: Reduzimos `hero-mobile-bim` para 800px (margem segura) e criamos `logodrcpro-footer.png` específico com 150px.
+2.  **Fetch Priority**: Adicionamos `fetchpriority="high"` explicitamente na tag `<img>` do mobile.
+3.  **Timeout Estendido**: Aumentamos o lazy load do GTM para 5000ms (5s), garantindo que a thread principal esteja 100% livre para o LCP/FCP inicial.
+
+#### 💡 O APRENDIZADO
+1.  **Regra da Prioridade Mobile**: Em LCP de mobile, `loading="eager"` não basta. Use `fetchpriority="high"` para furar a fila de requests.
+2.  **Regra do Logo**: Logos de footer raramente precisam de mais de 150-200px de largura física. Não reutilize o logo gigantão do header.
+3.  **Regra de Ouro do Script**: Se o site já carrega visualmente em 1.5s, empurre os scripts de tracking para 5s. O usuário não clica em nada antes disso.
+
+---
+
+### 📅 Ciclo: Compressão de Vídeos & Bandwidth (Jan 2026 - 1.6)
+
+#### ❌ O que Erramos / Problemas Encontrados
+1.  **Vídeos Gigantes**: Os vídeos dos cards de serviços (`drc-video-card1` e `card2`) somavam mais de 60MB, punindo usuários em redes móveis e aumentando o custo de banda.
+2.  **Compressão Inexistente**: Os arquivos originais estavam com bitrates muito acima do necessário para exibição web (ex: 20MB para 1 minuto de vídeo simples).
+
+#### ✅ O que Acertamos / Soluções Aplicadas
+1.  **FFmpeg CRF 28**: Reaplicamos a compressão padrão com `libx264` e `crf 28`.
+    *   `drc-video-card1`: 20.5MB -> 2.5MB (Redução de 88%)
+    *   `drc-video-card2`: 41.9MB -> 8.3MB (Redução de 80%)
+    *   `videogrid3`: 41.3MB -> 14.4MB (Redução de 65%)
+2.  **Economia Total**: Removemos **~78.5 MB** de transferência desnecessária com ZERO perda visual perceptível.
+
+#### 💡 O APRENDIZADO
+1.  **Regra do Vídeo**: Nunca suba um `.mp4` direto da edição para o site. Sempre passe pelo `ffmpeg` com `crf 28` (ou `23` se precisar de mais qualidade). Se o vídeo ficou com mais de 10MB, pergunte-se se ele realmente precisa ser tão longo ou ter essa resolução.
+
+---
+
+### [Próximo Ciclo...]
+*Adicione novos aprendizados aqui sem remover os anteriores.*

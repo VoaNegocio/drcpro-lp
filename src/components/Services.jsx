@@ -17,14 +17,14 @@ export const Services = () => {
             title: "Projetos Hidráulicos",
             description: "Água fria/quente, esgoto, pluvial e gás — com detalhamento e compatibilização para obra.",
             image: "/imgs/imggrid1.png",
-            video: "/videos/video1_opt.mp4"
+            video: "/videos/drc-video-card1_opt.mp4"
         },
         {
             icon: Layers,
             title: "Projetos Elétricos",
             description: "Iluminação, tomadas, cargas, quadros, circuitos, aterramento e SPDA — com documentação clara para execução.",
             image: "/imgs/imggrid2.png",
-            video: "/videos/videogrid2-rafael-pnc.mp4"
+            video: "/videos/drc-video-card2_opt.mp4"
         },
         {
             icon: ClipboardCheck,
@@ -32,7 +32,7 @@ export const Services = () => {
             description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
             buttonText: "VER COMO ENTREGAMOS",
             image: "/imgs/imgcard3.webp",
-            video: "/videos/videogrid3-marco-pnc.mp4"
+            video: "/videos/videogrid3-marco-pnc_opt.mp4"
         }
     ];
 
