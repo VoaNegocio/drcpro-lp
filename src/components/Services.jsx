@@ -30,7 +30,6 @@ export const Services = () => {
             icon: ClipboardCheck,
             title: "Compatibilização & Detecção de Conflitos (BIM)",
             description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
-            buttonText: "Veja como a DRCpro pode te ajudar",
             image: "/imgs/imgcard3.webp",
             video: "/videos/videogrid3-marco-pnc_opt.mp4"
         }
@@ -133,9 +132,9 @@ const ServiceCard = ({ service, index, onPlayVideo, onViewImage }) => {
                     <div className="relative z-10 translate-z-50 drop-shadow-xl">
                         <button
                             onClick={handleFlip}
-                            className="w-full inline-flex items-center justify-center bg-brand-red text-white font-bold uppercase tracking-wider text-sm py-4 rounded-lg hover:bg-red-700 transition-all duration-300 cursor-pointer animate-pulse-scale shadow-lg shadow-brand-red/30"
+                            className="w-full inline-flex items-center justify-center bg-brand-red text-white font-bold tracking-wider text-sm py-4 rounded-lg hover:bg-red-700 transition-all duration-300 cursor-pointer animate-pulse-scale shadow-lg shadow-brand-red/30"
                         >
-                            {service.buttonText || "VER ESCOPO"} <Play size={14} className="ml-2 fill-current" />
+                            {service.buttonText || "Veja como a DRCpro pode te ajudar"} <Play size={14} className="ml-2 fill-current" />
                         </button>
                     </div>
                 </Card>

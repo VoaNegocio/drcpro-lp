@@ -70,7 +70,7 @@ export const Hero = () => {
                     </div>
 
                     <p className="text-sm sm:text-base text-gray-400 mb-8 leading-relaxed max-w-xl font-medium">
-                        Não executamos obra.
+                        Não executamos obra. Nosso foco é na elaboração de um projeto certo e sem atrasos!
                     </p>
                 </motion.div>
 

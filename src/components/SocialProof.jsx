@@ -11,7 +11,7 @@ export const SocialProof = () => {
 
                 {/* Logos Grid */}
                 <div className="mb-16 md:mb-20">
-                    <p className="text-center text-gray-500 uppercase tracking-widest text-xs md:text-sm font-semibold mb-8">
+                    <p className="text-center text-gray-500 tracking-widest text-xs md:text-sm font-semibold mb-8">
                         Empresas que confiam projetos de instalações à DRCpro
                     </p>
                     <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
