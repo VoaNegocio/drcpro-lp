@@ -30,7 +30,7 @@ export const Services = () => {
             icon: ClipboardCheck,
             title: "Compatibilização & Detecção de Conflitos (BIM)",
             description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
-            buttonText: "VER COMO ENTREGAMOS",
+            buttonText: "Veja como a DRCpro pode te ajudar",
             image: "/imgs/imgcard3.webp",
             video: "/videos/videogrid3-marco-pnc_opt.mp4"
         }

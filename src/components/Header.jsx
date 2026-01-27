@@ -1,21 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Button } from './ui/Button';
 
 
 export const Header = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-
-
     const navLinks = [
         { name: 'Serviços', href: '#services' },
         { name: 'Diferenciais', href: '#differentials' },
@@ -25,8 +11,7 @@ export const Header = () => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-brand-dark/95 backdrop-blur-md py-3 md:py-4 shadow-lg' : 'bg-transparent py-4 md:py-6'
-                }`}
+            className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md py-3 md:py-4 shadow-lg transition-all duration-300"
         >
             <div className="container mx-auto px-4 flex justify-center md:justify-between items-center">
                 <a href="#" className="z-[60]">
@@ -45,7 +30,7 @@ export const Header = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-gray-300 hover:text-white transition-colors text-sm font-medium uppercase tracking-wide"
+                            className="text-gray-700 hover:text-brand-blue transition-colors text-sm font-medium uppercase tracking-wide"
                         >
                             {link.name}
                         </a>

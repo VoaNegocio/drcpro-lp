@@ -60,7 +60,7 @@ export const Hero = () => {
                     </div>
 
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl">
-                        Elaboração técnica com alto nível de detalhamento, compatibilização e rastreabilidade — entrega pronta para execução.
+                        Elaboração técnica com alto nível de detalhamento, compatibilização e rastreabilidade.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -70,7 +70,7 @@ export const Hero = () => {
                     </div>
 
                     <p className="text-sm sm:text-base text-gray-400 mb-8 leading-relaxed max-w-xl font-medium">
-                        Não executamos obra. Nosso foco é o projeto certo, antes do problema aparecer.
+                        Não executamos obra.
                     </p>
                 </motion.div>
 
@@ -79,10 +79,10 @@ export const Hero = () => {
             For now, keeping stats at bottom full width as per request 'Cards com números de autoridade em linha' */}
             </div>
 
-            <div className="relative md:absolute md:bottom-0 left-0 right-0 border-t border-white/10 bg-brand-dark/80 backdrop-blur-md z-20 mt-8 md:mt-0 overflow-hidden">
+            <div className="relative md:absolute md:bottom-0 left-0 right-0 border-t border-white/10 bg-brand-red backdrop-blur-md z-20 mt-8 md:mt-0 overflow-hidden">
                 <div className="py-2 md:py-4 flex relative">
-                    <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-brand-dark to-transparent z-10"></div>
-                    <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-brand-dark to-transparent z-10"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-brand-red to-transparent z-10"></div>
+                    <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-brand-red to-transparent z-10"></div>
 
                     <motion.div
                         className="flex gap-8 md:gap-16 px-4 whitespace-nowrap"
@@ -99,8 +99,8 @@ export const Hero = () => {
                                 key={index}
                                 className="flex flex-col items-center justify-center text-center group min-w-[80px] md:min-w-[100px]"
                             >
-                                <div className="mb-1 md:mb-2 p-1.5 md:p-2 rounded-full bg-white/5 group-hover:bg-brand-red/20 transition-colors duration-300 flex-shrink-0">
-                                    <stat.icon className="w-4 h-4 md:w-5 md:h-5 text-brand-cyan group-hover:text-brand-red transition-colors" />
+                                <div className="mb-1 md:mb-2 p-1.5 md:p-2 rounded-full bg-white/10 flex-shrink-0">
+                                    <stat.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
                                 </div>
                                 <h3 className="text-base md:text-xl font-bold text-white mb-0.5 md:mb-1">{stat.value}</h3>
                                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest leading-none">{stat.label}</p>
