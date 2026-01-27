@@ -5,23 +5,23 @@ export const Differentials = () => {
     const differentials = [
         {
             icon: CheckCircle2,
-            title: "Entrega técnica rastreável",
-            desc: "Versões, revisões e organização do pacote."
+            title: "Equipe técnica multidisciplinar",
+            desc: "100% dedicada a projetos."
         },
         {
             icon: Users,
-            title: "Compatibilização antes da obra",
-            desc: "Menos conflito, menos retrabalho."
+            title: "Integração total",
+            desc: "Entre projeto, coordenação e qualidade."
         },
         {
             icon: CloudLightning,
-            title: "Setor de qualidade interno",
-            desc: "Revisão técnica por especialistas."
+            title: "Gestão ativa de cronograma",
+            desc: "E entregas via ferramentas digitais."
         },
         {
             icon: FileBarChart2,
-            title: "Documentação clara para execução",
-            desc: "Equipe entende sem “depender do autor”."
+            title: "Portfólio",
+            desc: "Com empreendimentos comerciais e públicos."
         }
     ];
 
@@ -38,7 +38,7 @@ export const Differentials = () => {
                     {/* Left Content */}
                     <div className="text-white order-1 lg:order-1">
                         <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-9 leading-tight font-heading">
-                            Por que escolhem a <span className="text-brand-red">DRCpro</span> para projetos elétricos e hidráulicos?
+                            Por que escolhem a <span className="text-brand-red">DRCpro</span> para projetos de sistemas prediais?
                         </h2>
                         <p className="text-gray-400 text-base md:text-lg mb-5 max-w-md">
                             Não entregamos desenhos. Entregamos o projeto para a sua obra seguir sem improvisos - com método e qualidade.

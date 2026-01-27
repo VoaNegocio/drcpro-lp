@@ -16,7 +16,7 @@ export const CTAFinal = () => {
                     {/* Content */}
                     <div className="flex-1 space-y-6 md:space-y-8 order-2 md:order-1">
                         <h2 className="text-2xl md:text-5xl font-bold text-white leading-tight font-heading">
-                            Vai elaborar ou revisar um <span className="text-brand-red">projeto elétrico ou hidráulico?</span>
+                            Vai elaborar ou revisar  <span className="text-brand-red">projetos de sistemas prediais?</span>
                         </h2>
 
 
