@@ -1,45 +1,46 @@
-import { Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const SocialProof = () => {
     const clients = [
-        "Prolux", "MAC", "Vuny", "ONE Engenharia", "Ulbra", "VFOR"
+        "MAC", "Vuny", "ONE Engenharia", "VFOR",
+        "MAC", "Vuny", "ONE Engenharia", "VFOR", // Duplicating for better initial fill if list is short
     ];
 
     return (
-        <section className="py-16 md:py-24 bg-gray-50">
-            <div className="container mx-auto px-4">
+        <section className="py-12 md:py-16 bg-white border-b border-gray-100 overflow-hidden relative">
+            <div className="container mx-auto px-4 relative z-10">
+                <p className="text-center text-gray-400 font-bold tracking-[0.2em] text-xs mb-8 md:mb-12">
+                    Empresas que confiam na <span className="text-brand-red">DRCpro</span>
+                </p>
 
-                {/* Logos Grid */}
-                <div className="mb-16 md:mb-20">
-                    <p className="text-center text-gray-500 tracking-widest text-xs md:text-sm font-semibold mb-8">
-                        Empresas que confiam projetos de instalações à DRCpro
-                    </p>
-                    <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                        {clients.map((client) => (
-                            <div key={client} className="text-xl md:text-2xl font-bold text-gray-400 font-heading hover:text-brand-blue transition-colors cursor-default select-none">
-                                {client}
+                {/* Gradient Masks */}
+                <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none"></div>
+                <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
+
+                {/* Marquee Container */}
+                <div className="flex overflow-hidden mask-linear-gradient">
+                    <motion.div
+                        className="flex gap-12 md:gap-24 items-center whitespace-nowrap min-w-full"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{
+                            duration: 20,
+                            ease: "linear",
+                            repeat: Infinity,
+                        }}
+                    >
+                        {/* Render list twice to create seamless loop */}
+                        {[...clients, ...clients].map((client, index) => (
+                            <div
+                                key={`${client}-${index}`}
+                                className="group relative"
+                            >
+                                <span className="text-xl md:text-3xl font-bold text-gray-300 font-heading group-hover:text-brand-dark transition-colors duration-300 cursor-default select-none tracking-tight">
+                                    {client}
+                                </span>
                             </div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
-
-                {/* Testimonial */}
-                <div className="max-w-4xl mx-auto text-center relative px-4">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 md:-translate-y-12 text-gray-200">
-                        <Quote size={60} className="md:w-20 md:h-20" />
-                    </div>
-
-                    <blockquote className="relative z-10 pt-4">
-                        <p className="text-xl md:text-4xl font-medium text-brand-dark italic mb-6 md:mb-8 leading-relaxed font-heading">
-                            "Com a DRCpro, os projetos chegam no prazo e conseguimos prever as etapas sem surpresa. A organização técnica é o grande diferencial."
-                        </p>
-                        <footer className="text-gray-600">
-                            <strong className="block text-brand-dark text-lg font-bold">Michel</strong>
-                            <span className="text-sm uppercase tracking-wide">Diretor Técnico</span>
-                        </footer>
-                    </blockquote>
-                </div>
-
             </div>
         </section>
     );

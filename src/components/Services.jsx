@@ -22,14 +22,14 @@ export const Services = () => {
         {
             icon: Layers,
             title: "Projetos Elétricos",
-            description: "Iluminação, tomadas, cargas, quadros, circuitos, aterramento e SPDA — com documentação clara para execução.",
+            description: "Iluminação, tomadas, quadros, circuitos,  e SPDA — com documentação clara para execução.",
             image: "/imgs/imggrid2.png",
             video: "/videos/drc-video-card2_opt.mp4"
         },
         {
             icon: ClipboardCheck,
             title: "Compatibilização & Detecção de Conflitos (BIM)",
-            description: "Antecipe interferências entre elétrica/hidráulica e arquitetura/estrutura antes de virar retrabalho no canteiro.",
+            description: "Antecipe interferências entre disciplinas de engenharia e arquitetura.",
             image: "/imgs/imgcard3.webp",
             video: "/videos/videogrid3-marco-pnc_opt.mp4"
         }
