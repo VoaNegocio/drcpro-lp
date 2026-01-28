@@ -17,14 +17,14 @@ export const Services = () => {
             title: "Projetos Hidráulicos",
             description: "Água fria/quente, esgoto, pluvial e gás — com detalhamento e compatibilização para obra.",
             image: "/imgs/imggrid1.png",
-            video: "/videos/drc-video-card1_opt.mp4"
+            video: "/videos/musiquinha-card1-profdp.mp4"
         },
         {
             icon: Layers,
             title: "Projetos Elétricos",
             description: "Iluminação, tomadas, quadros, circuitos,  e SPDA — com documentação clara para execução.",
             image: "/imgs/imggrid2.png",
-            video: "/videos/drc-video-card2_opt.mp4"
+            video: "/videos/musiquinha-card2-profdp.mp4"
         },
         {
             icon: ClipboardCheck,
@@ -183,7 +183,7 @@ const ServiceCard = ({ service, index, onPlayVideo, onViewImage }) => {
                                 }}
                                 className="w-full inline-flex items-center justify-center bg-transparent border-2 border-brand-red text-white hover:bg-brand-red font-bold uppercase tracking-wider text-sm py-3 rounded-lg transition-all duration-300 gap-2 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
                             >
-                                <Play size={16} className="fill-current" /> VER VÍDEO COMPLETO
+                                <Play size={16} className="fill-current" /> Conheça os nossos projetos
                             </button>
                         </div>
                     </div>

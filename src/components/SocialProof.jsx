@@ -2,8 +2,9 @@ import { motion } from 'framer-motion';
 
 export const SocialProof = () => {
     const clients = [
-        "MAC", "Vuny", "ONE Engenharia", "VFOR",
-        "MAC", "Vuny", "ONE Engenharia", "VFOR", // Duplicating for better initial fill if list is short
+        "MAC", "Vuny", "ONE Innovation", "VFOR",
+        "Rocontec", "Vita Urban", "Aw Realty", "Setin",
+        "Vita Con", "Tools", "MF7"
     ];
 
     return (

@@ -38,7 +38,7 @@ export const CTAFinal = () => {
                             </div>
                             <div className="flex items-center gap-3">
                                 <Mail className="text-brand-cyan" size={20} />
-                                <span>comercial@drcpro.com.br</span>
+                                <span>comercial@drc.eng.br</span>
                             </div>
                         </div>
                     </div>
