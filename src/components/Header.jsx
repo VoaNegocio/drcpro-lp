@@ -5,7 +5,6 @@ export const Header = () => {
     const navLinks = [
         { name: 'Serviços', href: '#services' },
         { name: 'Diferenciais', href: '#differentials' },
-        { name: 'Clientes', href: '#clients' },
         { name: 'Contato', href: '#contact' },
     ];
 

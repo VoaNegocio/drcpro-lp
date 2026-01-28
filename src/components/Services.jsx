@@ -17,14 +17,16 @@ export const Services = () => {
             title: "Projetos Hidráulicos",
             description: "Água fria/quente, esgoto, pluvial e gás — com detalhamento e compatibilização para obra.",
             image: "/imgs/imggrid1.png",
-            video: "/videos/musiquinha-card1-profdp.mp4"
+            video: "/videos/musiquinha-card1-profdp.mp4",
+            buttonText: "Ver Escopo"
         },
         {
             icon: Layers,
             title: "Projetos Elétricos",
             description: "Iluminação, tomadas, quadros, circuitos,  e SPDA — com documentação clara para execução.",
             image: "/imgs/imggrid2.png",
-            video: "/videos/musiquinha-card2-profdp.mp4"
+            video: "/videos/musiquinha-card2-profdp.mp4",
+            buttonText: "Ver Escopo"
         },
         {
             icon: ClipboardCheck,
